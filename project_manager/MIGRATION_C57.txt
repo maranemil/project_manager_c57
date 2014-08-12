@@ -1,0 +1,80 @@
+///////////////////////////////////////////////////////
+//
+//  Concrete 5.7 addon development
+//
+///////////////////////////////////////////////////////
+
+----------------------------------------
+DB QUERY:
+
+$pageList->getPage()		    // old
+$pageList->getResults()		    // new
+
+$pageList->getTotal()		    // old
+$pageList->getTotalResults()	// new
+
+----------------------------------------
+VIEWS:
+
+$this->url() 			        // old
+$view->url()			        // new
+
+$this->redirect()			    // old
+$view->redirect()			    // new
+
+----------------------------------------
+
+TABS UI DASHBOARD VIEW:
+echo Loader::helper('concrete/interface')->tabs($tabs);		// old
+echo Loader::helper('concrete/ui')->tabs($tabs, false); 	// new
+
+----------------------------------------
+PACKAGES CONTROLLER:
+
+Before:
+class ProjectManagerPackage extends Package
+
+
+After:
+namespace Concrete\Package\ProjectManager;
+use Package;
+use BlockType;
+use SinglePage;
+use Loader;
+use Events;
+use User;
+use Group;
+use Concrete\Core\Html\Service\Html;
+use View;
+
+class Controller extends Package{
+
+----------------------------------------------------------------------
+USING MODEL IN VIEW/CONTROLLERS:
+
+Before:
+-----------
+$pm = Loader::model("percent","project_manager");
+PercentModel::PercentByPage(...);
+
+After:
+-----------
+use \Concrete\Package\ProjectManager\Models\Percent as PercentCalc;
+PercentCalc::PercentByPage(...);
+
+----------------------------------------------------------------------
+DEFINE PACKAGE MODEL:
+
+Before:
+-----------
+class Percent extends Model{
+
+After:
+-----------
+namespace Concrete\Package\ProjectManager\Models;
+use \Concrete\Core\Legacy\Model;
+use Loader;
+
+class Percent extends Model{
+
+----------------------------------------------------------------------
