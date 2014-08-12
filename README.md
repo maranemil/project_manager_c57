@@ -1,4 +1,4 @@
-project_manager_c57
+concrete57 project manager 0.9 ( development phase )
 ===================
 
-Concrete5 Addon ( for 5.7 version ) to manage pages statuses
+
