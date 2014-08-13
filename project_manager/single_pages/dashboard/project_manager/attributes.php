@@ -1,31 +1,25 @@
 <?php
 
-namespace Concrete\Package\ProjectManager\SinglePages;
-#namespace Concrete\Controller\SinglePage;
-#namespace Concrete\Controller\SinglePage\Dashboard\Pages;
 
-
+namespace Concrete\Package\ProjectManager;
 use \Concrete\Core\Page\Controller\DashboardPageController;
 
 #use Concrete\Core\User;
 #use Concrete\Core\Database;
-use Concrete\Core\Database\Database;
 #use \Concrete\Core\Page\Controller\DashboardPageController;
 #use Concrete\Core\Page\Controller\DashboardPageController;
 #use Concrete\Core\Validation\CSRF\Token as ValidationToken;
 #use Concrete\Package\PackageStartingPoint\Core\Service\Settings;
 #use Concrete\Core\Package;
-
-#namespace Concrete\Controller\SinglePage;
 #use \Concrete\Core\Page\Controller\PageController;
-
 #use Concrete\Core\Asset\Asset;
 #use Concrete\Core\Asset\AssetGroup;
 #use Concrete\Core\Authentication\AuthenticationType;
 #use Concrete\Core\Authentication\AuthenticationTypeFailureException;
-
 #use \Concrete\Block\Form\MiniSurvey;
 #use \Concrete\Block\Form\Statistics as FormBlockStatistics;
+
+use \Concrete\Core\Database;
 
 use Cache;
 use Config;
@@ -61,7 +55,6 @@ if (
     $this->controller->getTask() == 'edit' ||
     $this->controller->getTask() == 'add')
 ) {
-
 
 ?>
 <!-- ADD / EDIT / UPDATE ACTION -->
@@ -117,32 +110,28 @@ echo '
                     </thead>
                      <tbody>
                         <?php
-                            $db = Loader::db();
-                            $database = Database::getActiveConnection();
-                            $rs = $db->Execute('SELECT * FROM btProjectManagerPgAttributes');
-                            #$countAttributes = $rs->RecordCount();
-                            while($row = $rs->fetchRow() ) {
-                                echo '<tr>
-                                <td>
-                                    <img class="ccm-attribute-icon"
-                                    src="'.DIR_REL.'/packages/project_manager/images/folder-icon.png"
-                                    width="16" height="16" />
+                            foreach($arAttributes as $row){
+                               echo '
+                                <tr>
+                                    <td>
+                                        <img class="ccm-attribute-icon"
+                                        src="'.DIR_REL.'/packages/project_manager/images/folder-icon.png"
+                                        width="16" height="16" />
 
-                                    '.$row['cText'].'
+                                        '.$row['cText'].'
 
-                                  </td>
-                                  <td>
-                                    <a class="btn warning" href="'. $view->url("/dashboard/project_manager/attributes").'edit/?bID='.$row['bID'].'">
-                                        '.t('Edit').'
-                                    </a>
-                                  </td>
-                                  <td>
-                                    <a class="btn danger delete-btn" data-bid="'.$row['bID'].'"  data-task="delete">
-                                        '.t('Delete').'
-                                    </a>
-                                  </td>
+                                      </td>
+                                      <td>
+                                        <a class="btn warning" href="'. $view->url("/dashboard/project_manager/attributes").'/?bID='.$row['bID'].'&task=edit">
+                                            '.t('Edit').'
+                                        </a>
+                                      </td>
+                                      <td>
+                                        <a class="btn danger delete-btn" data-bid="'.$row['bID'].'"  data-task="delete">
+                                            '.t('Delete').'
+                                        </a>
+                                      </td>
                                 </tr>';
-
                                 // btn danger warning primary
                             }
                         ?>
@@ -184,7 +173,9 @@ echo '
 
 </script>
 
-
+<style type="text/css">
+    #ccm-tab-content-tab-1 {display: block }
+</style>
 
 <?php
 $html = Loader::helper('html');
