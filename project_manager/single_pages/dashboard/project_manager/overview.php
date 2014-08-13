@@ -39,8 +39,12 @@ defined('C5_EXECUTE') or die("Access Denied.");
 
 //echo '<pre>'; \Doctrine\Common\Util\Debug::dump($arAttributes); echo '</pre>';
 
-
+// GET AJAX PATH VER 1
 //echo Loader::helper('concrete/urls')->getToolsURL('project_manager');
+
+// GET AJAX PATH VER 2
+#$url = Loader::helper('concrete/urls');
+#echo $tools_url = $url->getToolsURL('ajax_connector','project_manager');
 
 if ( preg_match('/update|edit|add/',$this->controller->getTask()) ){ ?>
 <!-- ADD / EDIT / UPDATE -->
@@ -88,7 +92,8 @@ echo '
 
                 var ajaxUrlConn = "http://" + location.host + "" + CCM_REL;
                    // ajaxUrlConn+= "/index.php/tools/packages/"+pkgHandler+"/ajax_connector";
-                    ajaxUrlConn+= "/packages/project_manager/tools/ajax_connector.php";
+                      ajaxUrlConn+= "/index.php/tools/ajax_connector_pm";
+                   // ajaxUrlConn+= "/packages/project_manager/tools/ajax_connector.php";
 				
 				$.ajax({
 					url: ajaxUrlConn,

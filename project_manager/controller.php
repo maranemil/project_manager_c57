@@ -59,6 +59,14 @@ class Controller extends Package
         SinglePage::add('/dashboard/project_manager/attributes/delete',$pkg);
         SinglePage::add('/dashboard/project_manager/about',$pkg);
 
+
+        // copy ajax tool
+        /* @var $fh FileHelper */
+        $fh = Loader::helper('file');
+        $sourcePkg = DIR_PACKAGES."/".$this->pkgHandle."/tools/";
+        $targetTls = DIR_BASE . "/application/tools/";
+        $fh->copyAll($sourcePkg, $targetTls, $mode = null); // @ $mode = 0777
+
 	}
 
 	public function upgrade()
@@ -74,5 +82,13 @@ class Controller extends Package
 		$btTable = 'btProjectManagerPgStatus, btProjectManagerPgAttributes';
 		$db = Loader::db();
 		$db->Execute('DROP TABLE '.$btTable);
+
+         // remove ajax tool
+         /* @var $fh FileHelper */
+         #$fh = Loader::helper('file');
+         $targetTool = DIR_BASE . "/application/tools/ajax_connector_pm.php";
+         unlink($targetTool);
+         #$fh->removeAll( $targetTool);
+
 	}
 }
