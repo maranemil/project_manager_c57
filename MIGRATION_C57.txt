@@ -93,6 +93,7 @@ Resources by github:
 https://github.com/skybluesofa/concrete57_base_package
 https://github.com/ExchangeCore/Concrete5.7-text-icons
 https://github.com/concrete5/concrete5-5.7.0
+https://github.com/concrete5/concrete5-5.7.0/wiki/Migration-Guide
 
 Articles:
 http://andrewembler.com/posts/5-7-preview-developer-changes/
