@@ -1,11 +1,14 @@
 <?php
 
 namespace Concrete\Package\ProjectManager\Controller\SinglePage\Dashboard\ProjectManager;
+
 use \Concrete\Core\Page\Controller\DashboardPageController;
+
 #use Concrete\Core\Page\Controller\DashboardPageController;
 #use \Concrete\Core\Page\Controller\PageController;
 use \Concrete\Core\Database;
 use \Concrete\Package\ProjectManager\Models\Percent;
+
 #use Concrete\Core\Database\Database;
 use Cache;
 use Config;
@@ -25,6 +28,7 @@ use Page;
 use Permissions;
 use UserInfo;
 use PageTemplate;
+
 #use PageList;
 use Concrete\Core\Page\PageList;
 use Settings;
@@ -39,27 +43,23 @@ defined('C5_EXECUTE') or die("Access Denied.");
  * Date: 12.08.14
  * Time: 21:33
  */
+class Attributes extends DashboardPageController {
 
+   public $helpers = array('html', 'form');
 
-class Attributes extends DashboardPageController{
+   public function view() {
+	  $db           = Loader::db();
+	  $arAttributes = array();
+	  #$database = Database::getActiveConnection();
+	  $rs = $db->Execute('SELECT * FROM btProjectManagerPgAttributes');
+	  #$countAttributes = $rs->RecordCount();
+	  $countAttributes = $rs->rowCount();
+	  while ($row = $rs->fetchRow()) {
+		 $arAttributes[] = $row;
+	  }
 
-    public $helpers = array('html','form');
-
-    public function view() {
-
-        $db = Loader::db();
-        $arAttributes = array();
-        #$database = Database::getActiveConnection();
-        $rs = $db->Execute('SELECT * FROM btProjectManagerPgAttributes');
-        #$countAttributes = $rs->RecordCount();
-        $countAttributes = $rs->rowCount();
-        while($row = $rs->fetchRow() ) {
-            $arAttributes[] = $row;
-        }
-
-        $this->set('arAttributes', $arAttributes);
-        $this->set('countAttributes', $countAttributes);
-
-    }
+	  $this->set('arAttributes', $arAttributes);
+	  $this->set('countAttributes', $countAttributes);
+   }
 
 }
