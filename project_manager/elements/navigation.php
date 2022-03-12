@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUndefinedVariableInspection */
 
 #namespace Concrete\Package\ProjectManager\Elements\Navigation;
 #Use Form;

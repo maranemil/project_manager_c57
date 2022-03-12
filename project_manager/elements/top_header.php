@@ -1,4 +1,6 @@
-<?php defined('C5_EXECUTE') or die("Access Denied.");
+<?php /** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUndefinedConstantInspection */
+defined('C5_EXECUTE') or die("Access Denied.");
 
 /**
  * Created by PhpStorm.
@@ -18,8 +20,8 @@ $pjHelpStr .= '<img width="10" src="' . DIR_REL . '/packages/project_manager/ima
 $pjHelpStr .= '3 - ' . t('Approved from QA');
 
 echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(
-	t('MCE37 Project Manager'),
-	$pjHelpStr,
-	false,
-	false
+    t('MCE37 Project Manager'),
+    $pjHelpStr,
+    false,
+    false
 );

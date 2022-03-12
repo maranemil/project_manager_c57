@@ -1,8 +1,14 @@
-<?php
+<?php /** @noinspection PhpUnusedAliasInspection */
+/** @noinspection DuplicatedCode */
+/** @noinspection PhpDynamicAsStaticMethodCallInspection */
+/** @noinspection SqlNoDataSourceInspection */
+/** @noinspection SqlDialectInspection */
+
+/** @noinspection PhpUndefinedClassInspection */
 
 namespace Concrete\Package\ProjectManager\Tools;
 
-use \Concrete\Package\ProjectManager\Models\Percent as PercentCalc;
+use Concrete\Package\ProjectManager\Models\Percent as PercentCalc;
 
 #use \Concrete\Core\Legacy\Loader;
 #use \Concrete\Core\Legacy\UserList;
@@ -53,7 +59,7 @@ $aID = $_REQUEST["aID"]; // Attribute ID
 $sID = $_REQUEST["sID"]; // Status ID
 
 #Loader::model('user');
-$u   = new User();
+$u = new User();
 $uID = $u->getUserID();
 
 /*if($u->isLoggedIn()) {
@@ -63,19 +69,18 @@ $uID = $u->getUserID();
 }*/
 //$ui = UserInfo::getByID($uID);
 
-$db         = Loader::db();
+$db = Loader::db();
 $queryCheck = "SELECT * FROM btProjectManagerPgStatus WHERE aID = " . $aID . " AND pID = " . $pID . " ";
-$rs         = $db->Execute($queryCheck);
+$rs = $db->Execute($queryCheck);
 #$countCheck = $rs->RecordCount();
 $countCheck = $rs->rowCount();
 
 if ($countCheck) {
-   $queryUpdate = "UPDATE btProjectManagerPgStatus SET sID = " . $sID . " WHERE aID = " . $aID . " AND pID = " . $pID . " ";
-   $db->Execute($queryUpdate);
-}
-else {
-   $queryInsert = "INSERT INTO btProjectManagerPgStatus (bID,pID,aID,cDate,uID,sID) VALUES( NULL," . $pID . "," . $aID . ",NOW()," . $uID . "," . $sID . " ) ";
-   $db->Execute($queryInsert);
+    $queryUpdate = "UPDATE btProjectManagerPgStatus SET sID = " . $sID . " WHERE aID = " . $aID . " AND pID = " . $pID . " ";
+    $db->Execute($queryUpdate);
+} else {
+    $queryInsert = "INSERT INTO btProjectManagerPgStatus (bID,pID,aID,cDate,uID,sID) VALUES( NULL," . $pID . "," . $aID . ",NOW()," . $uID . "," . $sID . " ) ";
+    $db->Execute($queryInsert);
 }
 
 $rs = $db->Execute('SELECT * FROM btProjectManagerPgAttributes');
